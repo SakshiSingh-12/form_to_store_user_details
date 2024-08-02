@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Form</title>
+    <link rel="stylesheet" href="./form.css">
+</head>
+<body>
+    <form action="/submit" method="POST" enctype="multipart/form-data">
+        <h3><span>Add User Details</span></h3>
+        <label for="name">Name:</label>
+        <input type="text" name="name" placeholder="Name" required>
+        <label for="gender">Gende:</label>
+        <select name="gender" required>
+            <option value="" disabled selected>Select Your Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+        <label for="mobile">Mobile No.:</label>
+        <input type="text" name="mobile" placeholder="Mobile Number" required>
+        <label for="email">Email:</label>
+        <input type="email" name="email" placeholder="Email" required>
+        <label for="image">Select Image:</label>
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Submit Details</button>
+    </form>
+</body>
+</html>
