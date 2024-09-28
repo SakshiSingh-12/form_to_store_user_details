@@ -136,3 +136,18 @@ app.delete('/api/delete_user/:id', (req, res) => {
         res.sendStatus(200);
     });
 });
+
+
+// Start server
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
+});
+
+
+
+
+
+
+
+
