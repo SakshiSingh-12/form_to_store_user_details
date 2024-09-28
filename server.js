@@ -19,3 +19,8 @@ db.connect((err) => {
     if (err) throw err;
     console.log('MySQL Connected...');
 });
+
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
