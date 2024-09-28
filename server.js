@@ -88,6 +88,15 @@ app.delete('/api/delete_user/:id', (req, res) => {
 app.post('/submit', upload.single('image'), (req, res) => {
     const { name, gender, mobile, email } = req.body;
     const image = req.file.buffer;
+    
+
+    let sql = 'INSERT INTO users (name, gender, mobile, email, image) VALUES (?, ?, ?, ?, ?)';
+    db.query(sql, [name, gender, mobile, email, image], (err, result) => {
+        if (err) throw err;
+        res.send('Go and watch http://localhost:3000/view_users in your browser');
+    });
+});
+
 
     
 app.get('/view_users', (req, res) => {
@@ -101,3 +110,47 @@ app.get('/api/view_users', (req, res) => {
         res.send(results);
     });
 });
+
+    
+app.get('/api/user_image/:id', (req, res) => {
+    const userId = req.params.id;
+    let sql = 'SELECT image FROM users WHERE id = ?';
+    db.query(sql, [userId], (err, result) => {
+        if (err) throw err;
+        if (result.length > 0) {
+            res.writeHead(200, { 'Content-Type': 'image/jpeg' });
+            res.end(result[0].image);
+        } else {
+            res.status(404).send('Image not found');
+        }
+    });
+});
+
+// Delete user route
+app.delete('/api/delete_user/:id', (req, res) => {
+    const userId = req.params.id;
+    let sql = 'DELETE FROM users WHERE id = ?';
+    db.query(sql, [userId], (err, result) => {
+        if (err) throw err;
+        res.sendStatus(200);
+    });
+});
+
+// Start server
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
+});
+
+
+
+// Start server
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
+});
+
+
+
+
+
