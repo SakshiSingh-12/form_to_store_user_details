@@ -45,3 +45,41 @@ app.post('/submit', upload.single('image'), (req, res) => {
         res.send('Go and watch http://localhost:3000/view_users in your browser');
     });
 });
+
+
+app.get('/view_users', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'users.html'));
+});
+
+app.get('/api/view_users', (req, res) => {
+    let sql = 'SELECT id, name, gender, mobile, email FROM users';
+    db.query(sql, (err, results) => {
+        if (err) throw err;
+        res.send(results);
+    });
+});
+
+app.get('/api/user_image/:id', (req, res) => {
+    const userId = req.params.id;
+    let sql = 'SELECT image FROM users WHERE id = ?';
+    db.query(sql, [userId], (err, result) => {
+        if (err) throw err;
+        if (result.length > 0) {
+            res.writeHead(200, { 'Content-Type': 'image/jpeg' });
+            res.end(result[0].image);
+        } else {
+            res.status(404).send('Image not found');
+        }
+    });
+});
+
+// Delete user route
+app.delete('/api/delete_user/:id', (req, res) => {
+    const userId = req.params.id;
+    let sql = 'DELETE FROM users WHERE id = ?';
+    db.query(sql, [userId], (err, result) => {
+        if (err) throw err;
+        res.sendStatus(200);
+    });
+});
+
