@@ -83,3 +83,15 @@ app.delete('/api/delete_user/:id', (req, res) => {
     });
 });
 
+
+
+app.post('/submit', upload.single('image'), (req, res) => {
+    const { name, gender, mobile, email } = req.body;
+    const image = req.file.buffer;
+
+    let sql = 'INSERT INTO users (name, gender, mobile, email, image) VALUES (?, ?, ?, ?, ?)';
+    db.query(sql, [name, gender, mobile, email, image], (err, result) => {
+        if (err) throw err;
+        res.send('Go and watch http://localhost:3000/view_users in your browser');
+    });
+});
