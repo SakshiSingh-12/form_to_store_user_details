@@ -125,3 +125,14 @@ app.get('/api/user_image/:id', (req, res) => {
         }
     });
 });
+
+
+// Delete user route
+app.delete('/api/delete_user/:id', (req, res) => {
+    const userId = req.params.id;
+    let sql = 'DELETE FROM users WHERE id = ?';
+    db.query(sql, [userId], (err, result) => {
+        if (err) throw err;
+        res.sendStatus(200);
+    });
+});
