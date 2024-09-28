@@ -89,9 +89,15 @@ app.post('/submit', upload.single('image'), (req, res) => {
     const { name, gender, mobile, email } = req.body;
     const image = req.file.buffer;
 
-    let sql = 'INSERT INTO users (name, gender, mobile, email, image) VALUES (?, ?, ?, ?, ?)';
-    db.query(sql, [name, gender, mobile, email, image], (err, result) => {
+    
+app.get('/view_users', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'users.html'));
+});
+
+app.get('/api/view_users', (req, res) => {
+    let sql = 'SELECT id, name, gender, mobile, email FROM users';
+    db.query(sql, (err, results) => {
         if (err) throw err;
-        res.send('Go and watch http://localhost:3000/view_users in your browser');
+        res.send(results);
     });
 });
