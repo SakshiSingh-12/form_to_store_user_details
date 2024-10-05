@@ -30,7 +30,10 @@ app.use(express.static('public'));
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-
+// Routes
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'form.html'));
+});
 
 app.post('/submit', upload.single('image'), (req, res) => {
     const { name, gender, mobile, email } = req.body;
