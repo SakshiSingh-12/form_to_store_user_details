@@ -26,9 +26,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 
-// File upload setup
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
 
 // Routes
 app.get('/', (req, res) => {
