@@ -21,10 +21,6 @@ db.connect((err) => {
 });
 
 
-// Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
-
 
 // File upload setup
 const storage = multer.memoryStorage();
