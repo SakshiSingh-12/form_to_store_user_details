@@ -59,6 +59,22 @@ app.get('/api/view_users', (req, res) => {
     });
 });
 
+
+app.get('/api/user_image/:id', (req, res) => {
+    const userId = req.params.id;
+    let sql = 'SELECT image FROM users WHERE id = ?';
+    db.query(sql, [userId], (err, result) => {
+        if (err) throw err;
+        if (result.length > 0) {
+            res.writeHead(200, { 'Content-Type': 'image/jpeg' });
+            res.end(result[0].image);
+        } else {
+            res.status(404).send('Image not found');
+        }
+    });
+});
+
+
 // Delete user route
 app.delete('/api/delete_user/:id', (req, res) => {
     const userId = req.params.id;
