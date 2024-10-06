@@ -44,6 +44,14 @@ button {
 }
 
 
+button:hover {
+   background-color: rgb(35, 149, 225);
+}
+label{
+    margin-bottom: -1%;
+}
+
+
 
 
 
