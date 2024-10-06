@@ -37,6 +37,14 @@ input, select {
     font-size: 16px;
 }
 
+button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: rgba(14, 156, 250, 0.893);
+}
+
+
+
 
 
 
